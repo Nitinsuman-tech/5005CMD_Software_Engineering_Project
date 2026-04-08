@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo, useCallback } from "react";
 import { useAuth } from "../context/AuthContext";
 import { db } from "../utils/firebase";
+import { purgeAllData } from "../utils/adminDataWipe";
 import {
   collection,
   getDocs,
@@ -52,6 +53,9 @@ export default function AdminDashboard({ initialTab }) {
 
   // ── Confirm dialogs ──
   const [confirmAction, setConfirmAction] = useState(null);
+  const [confirmText, setConfirmText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [wipeProgress, setWipeProgress] = useState(null);
 
   const today = new Date().toLocaleDateString("en-GB", {
     weekday: "long", year: "numeric", month: "long", day: "numeric",
@@ -171,29 +175,88 @@ export default function AdminDashboard({ initialTab }) {
   
   const handleDeleteSchool = async (school) => {
     setConfirmAction({
+      type: "destructive",
+      entityName: school.schoolName,
       title: "Delete School",
-      message: `Are you sure you want to delete "${school.schoolName}"? This will remove the school record. Users linked to this school will lose their school association.`,
+      message: `Are you sure you want to delete "${school.schoolName}"? This will permanently cascade-delete the school and ALL associated users, classes, sightings, messages, and showcase items.`,
       onConfirm: async () => {
+        setIsDeleting(true);
         try {
-          
-          await deleteDoc(doc(db, "schools", school.id));
+          const batchArray = [];
+          let batch = writeBatch(db);
+          let opCount = 0;
 
-          
-          const batch = writeBatch(db);
-          const affectedUsers = users.filter((u) => u.schoolId === school.id);
-          affectedUsers.forEach((u) => {
-            batch.update(doc(db, "users", u.id), { schoolId: null });
-          });
+          const commitBatch = async () => {
+            if (opCount > 0) {
+              batchArray.push(batch);
+              batch = writeBatch(db);
+              opCount = 0;
+            }
+          };
 
-          
-          const codesSnap = await getDocs(
-            query(collection(db, "accessCodes"), where("schoolId", "==", school.id))
-          );
-          codesSnap.docs.forEach((d) => {
-            batch.update(doc(db, "accessCodes", d.id), { active: false });
-          });
+          const addDelete = async (docRef) => {
+            batch.delete(docRef);
+            opCount++;
+            if (opCount >= 499) await commitBatch();
+          };
 
-          await batch.commit();
+          // 1. Delete the school itself
+          await addDelete(doc(db, "schools", school.id));
+
+          // 2. Query simple related collections by schoolId
+          const colsToDeleteBySchoolId = [
+            "users", "classes", "contributions", "enrollments",
+            "sightings", "notifications", "accessCodes"
+          ];
+
+          const userIds = new Set();
+          const classIds = new Set();
+
+          for (const colName of colsToDeleteBySchoolId) {
+             const q = query(collection(db, colName), where("schoolId", "==", school.id));
+             const snap = await getDocs(q);
+             for (const d of snap.docs) {
+               if (colName === "users") userIds.add(d.id);
+               if (colName === "classes") classIds.add(d.id);
+               await addDelete(d.ref);
+             }
+          }
+
+          await commitBatch(); // commit early
+
+          // 3. Delete classMembers
+          if (classIds.size > 0) {
+            const classIdsArray = Array.from(classIds);
+            for (let i = 0; i < classIdsArray.length; i += 10) {
+              const chunk = classIdsArray.slice(i, i + 10);
+              const q = query(collection(db, "classMembers"), where("classId", "in", chunk));
+              const snap = await getDocs(q);
+              for (const d of snap.docs) await addDelete(d.ref);
+            }
+          }
+
+          await commitBatch();
+
+          // 4. Delete messages
+          if (userIds.size > 0) {
+             const userIdsArray = Array.from(userIds);
+             for (let i = 0; i < userIdsArray.length; i += 10) {
+               const chunk = userIdsArray.slice(i, i + 10);
+               const qSend = query(collection(db, "messages"), where("senderId", "in", chunk));
+               const snapSend = await getDocs(qSend);
+               for (const d of snapSend.docs) await addDelete(d.ref);
+
+               const qRecv = query(collection(db, "messages"), where("receiverId", "in", chunk));
+               const snapRecv = await getDocs(qRecv);
+               for (const d of snapRecv.docs) await addDelete(d.ref);
+             }
+          }
+
+          await commitBatch();
+          for (const b of batchArray) {
+            await b.commit();
+          }
+
           await fetchAllData();
           setSelectedSchool(null);
           setConfirmAction(null);
@@ -201,6 +264,9 @@ export default function AdminDashboard({ initialTab }) {
           console.error("Error deleting school:", err);
           alert("Failed to delete school. Check console for details.");
           setConfirmAction(null);
+        } finally {
+          setIsDeleting(false);
+          setConfirmText("");
         }
       },
     });
@@ -208,26 +274,72 @@ export default function AdminDashboard({ initialTab }) {
 
   const handleDeleteOrg = async (org) => {
     setConfirmAction({
+      type: "destructive",
+      entityName: org.orgName,
       title: "Delete Community",
-      message: `Are you sure you want to delete "${org.orgName}"? This will remove the community record. Members linked to this community will lose their association.`,
+      message: `Are you sure you want to delete "${org.orgName}"? This will permanently cascade-delete the community and ALL associated members, contributions, sightings, and messages.`,
       onConfirm: async () => {
+        setIsDeleting(true);
         try {
-          await deleteDoc(doc(db, "organizations", org.id));
+          const batchArray = [];
+          let batch = writeBatch(db);
+          let opCount = 0;
 
-          const batch = writeBatch(db);
-          const affectedUsers = users.filter((u) => u.orgId === org.id);
-          affectedUsers.forEach((u) => {
-            batch.update(doc(db, "users", u.id), { orgId: null });
-          });
+          const commitBatch = async () => {
+            if (opCount > 0) {
+              batchArray.push(batch);
+              batch = writeBatch(db);
+              opCount = 0;
+            }
+          };
 
-          const codesSnap = await getDocs(
-            query(collection(db, "communityInviteCodes"), where("orgId", "==", org.id))
-          );
-          codesSnap.docs.forEach((d) => {
-            batch.update(doc(db, "communityInviteCodes", d.id), { active: false });
-          });
+          const addDelete = async (docRef) => {
+            batch.delete(docRef);
+            opCount++;
+            if (opCount >= 499) await commitBatch();
+          };
 
-          await batch.commit();
+          // 1. Delete the org itself
+          await addDelete(doc(db, "organizations", org.id));
+
+          // 2. Query simple related collections by orgId
+          const colsToDeleteByOrgId = [
+            "users", "contributions", "sightings", "notifications", "communityInviteCodes"
+          ];
+
+          const userIds = new Set();
+
+          for (const colName of colsToDeleteByOrgId) {
+             const q = query(collection(db, colName), where("orgId", "==", org.id));
+             const snap = await getDocs(q);
+             for (const d of snap.docs) {
+               if (colName === "users") userIds.add(d.id);
+               await addDelete(d.ref);
+             }
+          }
+
+          await commitBatch();
+
+          // 3. Delete messages
+          if (userIds.size > 0) {
+             const userIdsArray = Array.from(userIds);
+             for (let i = 0; i < userIdsArray.length; i += 10) {
+               const chunk = userIdsArray.slice(i, i + 10);
+               const qSend = query(collection(db, "messages"), where("senderId", "in", chunk));
+               const snapSend = await getDocs(qSend);
+               for (const d of snapSend.docs) await addDelete(d.ref);
+
+               const qRecv = query(collection(db, "messages"), where("receiverId", "in", chunk));
+               const snapRecv = await getDocs(qRecv);
+               for (const d of snapRecv.docs) await addDelete(d.ref);
+             }
+          }
+
+          await commitBatch();
+          for (const b of batchArray) {
+            await b.commit();
+          }
+
           await fetchAllData();
           setSelectedOrg(null);
           setConfirmAction(null);
@@ -235,6 +347,9 @@ export default function AdminDashboard({ initialTab }) {
           console.error("Error deleting community:", err);
           alert("Failed to delete community. Check console for details.");
           setConfirmAction(null);
+        } finally {
+          setIsDeleting(false);
+          setConfirmText("");
         }
       },
     });
@@ -333,13 +448,33 @@ export default function AdminDashboard({ initialTab }) {
     <div className="admin-dashboard">
       
       {confirmAction && (
-        <div className="admin-modal-overlay" onClick={() => setConfirmAction(null)}>
-          <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
-            <h3>{confirmAction.title}</h3>
+        <div className="admin-modal-overlay" onClick={() => !isDeleting && setConfirmAction(null)}>
+          <div className={`admin-modal ${confirmAction.type === 'destructive' ? 'modal-destructive' : ''}`} onClick={(e) => e.stopPropagation()}>
+            <h3>{confirmAction.type === 'destructive' && "⚠️ "}{confirmAction.title}</h3>
             <p>{confirmAction.message}</p>
+            
+            {confirmAction.type === 'destructive' && (
+              <div className="modal-confirm-input">
+                <label>Type <strong>{confirmAction.entityName}</strong> to confirm:</label>
+                <input 
+                  type="text" 
+                  value={confirmText} 
+                  onChange={(e) => setConfirmText(e.target.value)}
+                  placeholder={confirmAction.entityName}
+                  disabled={isDeleting}
+                />
+              </div>
+            )}
+            
             <div className="admin-modal-actions">
-              <button className="btn-cancel" onClick={() => setConfirmAction(null)}>Cancel</button>
-              <button className="btn-danger" onClick={confirmAction.onConfirm}>Confirm</button>
+              <button className="btn-cancel" onClick={() => { setConfirmAction(null); setConfirmText(""); }} disabled={isDeleting}>Cancel</button>
+              <button 
+                className="btn-danger" 
+                onClick={confirmAction.onConfirm}
+                disabled={isDeleting || (confirmAction.type === 'destructive' && confirmText !== confirmAction.entityName)}
+              >
+                {isDeleting ? "Deleting..." : "Confirm"}
+              </button>
             </div>
           </div>
         </div>
@@ -365,6 +500,7 @@ export default function AdminDashboard({ initialTab }) {
           { key: "users", label: "Users", icon: "👥" },
           { key: "library", label: "Public Library", icon: "📚" },
           { key: "analytics", label: "Analytics", icon: "📈" },
+          { key: "system", label: "System", icon: "⚙️" },
         ].map((tab) => (
           <button
             key={tab.key}
@@ -1084,6 +1220,75 @@ export default function AdminDashboard({ initialTab }) {
             )}
           </div>
         </>
+      )}
+
+      {/* SYSTEM TAB */}
+      {activeTab === "system" && (
+        <div className="admin-section system-section">
+          <div className="section-header">
+            <h3 style={{ color: "#c62828" }}>⚠️ Danger Zone - System Wipe</h3>
+          </div>
+          <p className="section-desc">
+            This utility will perform a <strong>Full System Wipe</strong>. It permanently deletes all user-generated data across all collections (Schools, Communities, Users, Classes, Contributions, Messages, etc). 
+            <br/><br/>
+            <strong>Preserved Data:</strong>
+            <br/> • Your Admin Account ({userData?.email})
+            <br/> • Seed Content (Public Library articles, Species Data, Bookshelf Resources)
+          </p>
+
+          <div style={{ marginTop: "20px", padding: "16px", border: "1px solid #ffcdd2", borderRadius: "8px", backgroundColor: "#fff5f5" }}>
+            <h4 style={{ margin: "0 0 10px 0", color: "#b71c1c" }}>Initiate Fresh Start</h4>
+            <p style={{ margin: "0 0 10px 0", fontSize: "14px" }}>To confirm, type <strong>PURGE ALL DATA</strong> below:</p>
+            <input 
+              type="text"
+              className="filter-input"
+              value={confirmText}
+              onChange={(e) => setConfirmText(e.target.value)}
+              placeholder="PURGE ALL DATA"
+              disabled={isDeleting}
+              style={{ width: "100%", maxWidth: "300px", marginBottom: "12px", border: "1px solid #ef9a9a" }}
+            />
+            <br />
+            <button 
+              className="btn-danger" 
+              disabled={isDeleting || confirmText !== "PURGE ALL DATA"}
+              onClick={async () => {
+                setIsDeleting(true);
+                setWipeProgress({ status: "Wiping data..." });
+                try {
+                  const summary = await purgeAllData(user.uid, (collectionName, count, total) => {
+                    setWipeProgress({ 
+                      status: `Wiping ${collectionName}...`, 
+                      details: `Deleted ${count} items. Total: ${total}` 
+                    });
+                  });
+                  setWipeProgress({ status: "Wipe Complete!", summary });
+                  setConfirmText("");
+                  await fetchAllData();
+                } catch (err) {
+                  setWipeProgress({ status: "Wipe Failed", error: err.message });
+                } finally {
+                  setIsDeleting(false);
+                }
+              }}
+            >
+              {isDeleting ? "Purging..." : "PERFORM SYSTEM WIPE"}
+            </button>
+            
+            {wipeProgress && (
+              <div style={{ marginTop: "16px", padding: "12px", backgroundColor: "#fff", borderRadius: "8px", border: "1px solid #eee" }}>
+                <strong>{wipeProgress.status}</strong>
+                {wipeProgress.details && <p style={{ fontSize: "12px", margin: "4px 0" }}>{wipeProgress.details}</p>}
+                {wipeProgress.summary && (
+                  <pre style={{ fontSize: "11px", backgroundColor: "#f5f5f5", padding: "8px", borderRadius: "4px", marginTop: "8px", overflow: "auto" }}>
+                    {JSON.stringify(wipeProgress.summary, null, 2)}
+                  </pre>
+                )}
+                {wipeProgress.error && <p style={{ color: "red", fontSize: "12px" }}>{wipeProgress.error}</p>}
+              </div>
+            )}
+          </div>
+        </div>
       )}
     </div>
   );
