@@ -1,0 +1,295 @@
+.sightings-list-page {
+  padding: 28px;
+}
+
+.sl-header-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  margin-bottom: 22px;
+}
+
+.sl-header-card h3 {
+  color: #1b4332;
+  margin: 0 0 14px 0;
+  font-size: 20px;
+}
+
+.sl-filters {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.sl-filters select {
+  padding: 8px 12px;
+  border: 1px solid #d7e3d9;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+  color: #111;
+}
+
+.sl-count {
+  font-size: 13px;
+  color: #888;
+  margin-left: auto;
+}
+
+.sl-loading {
+  color: #888;
+  font-size: 14px;
+  padding: 20px;
+}
+
+.sl-empty-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 40px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  color: #666;
+}
+
+.sl-reports {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sl-report-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.sl-report-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.sl-report-species {
+  font-weight: 700;
+  color: #1b4332;
+  font-size: 17px;
+}
+
+.sl-report-student {
+  font-size: 13px;
+  color: #666;
+  margin-top: 2px;
+}
+
+.sl-report-status {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.sl-status-pending {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.sl-status-reviewed {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.sl-status-approved {
+  background: #e8f5e9;
+  color: #2E7D32;
+}
+
+.sl-report-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.sl-report-desc {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+  margin: 0 0 10px 0;
+}
+
+.sl-report-photo {
+  width: 160px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e0e8e0;
+  margin-bottom: 10px;
+}
+
+.sl-teacher-note {
+  background: #f4f8f4;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #333;
+  border-left: 3px solid #388E3C;
+  margin-top: 8px;
+}
+
+.sl-review-btn {
+  padding: 8px 20px;
+  background: #388E3C;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.sl-review-btn:hover {
+  background: #2E7D32;
+}
+
+.sl-review-form {
+  margin-top: 12px;
+  border-top: 1px solid #e0e8e0;
+  padding-top: 12px;
+}
+
+.sl-review-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #d7e3d9;
+  border-radius: 8px;
+  font-size: 14px;
+  min-height: 70px;
+  resize: vertical;
+  font-family: inherit;
+  outline: none;
+  margin-bottom: 10px;
+  background: #fff;
+  color: #111;
+}
+
+.sl-review-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.sl-cancel-btn {
+  padding: 8px 16px;
+  border: 1px solid #d7e3d9;
+  border-radius: 8px;
+  background: #fff;
+  color: #333;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.sl-save-btn {
+  padding: 8px 16px;
+  background: #388E3C;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.sl-save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Feedback section in sightings */
+.sl-sighting-feedback-section {
+  margin-top: 10px;
+  border-top: 1px solid #e8ece8;
+  padding-top: 8px;
+}
+
+.sl-feedback-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 12px;
+  background: #f4f8f4;
+  border: 1px solid #d7e3d9;
+  border-radius: 8px;
+  color: #1b4332;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sl-feedback-toggle:hover {
+  background: #e8f5e9;
+}
+
+.sl-sighting-feedback-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  padding-left: 10px;
+  border-left: 2px solid #d7e3d9;
+}
+
+.sl-sighting-feedback-entry {
+  background: #fafcfa;
+  border-radius: 8px;
+  padding: 10px 12px;
+  border: 1px solid #e8ece8;
+}
+
+.sl-sighting-fb-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.sl-sighting-fb-author {
+  font-size: 12px;
+  font-weight: 700;
+  color: #2E7D32;
+}
+
+.sl-sighting-fb-time {
+  font-size: 11px;
+  color: #999;
+}
+
+.sl-sighting-fb-text {
+  font-size: 13px;
+  color: #333;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.sl-add-feedback-btn {
+  padding: 6px 14px;
+  background: transparent;
+  border: 1px dashed #388E3C;
+  border-radius: 8px;
+  color: #388E3C;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s;
+}
+
+.sl-add-feedback-btn:hover {
+  background: #f4f8f4;
+}
