@@ -1,0 +1,141 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ============================================================
+    // CONTRIBUTIONS (Student Work / Sighting Reports)
+    // Public read for library showcase - no auth required
+    // Write requires authentication
+    // ============================================================
+    match /contributions/{docId} {
+      allow read: if true;
+      allow create: if request.auth != null;
+      allow update: if request.auth != null;
+      allow delete: if request.auth != null;
+    }
+
+    // ============================================================
+    // MESSAGES - Strict RBAC
+    // Only authenticated users can read/write
+    // Read: only sender or receiver can read their messages
+    // Create: senderId must match authenticated user
+    // ============================================================
+    match /messages/{docId} {
+      allow read: if request.auth != null &&
+        (resource.data.senderId == request.auth.uid ||
+         resource.data.receiverId == request.auth.uid);
+      allow create: if request.auth != null &&
+        request.resource.data.senderId == request.auth.uid;
+      allow update: if request.auth != null &&
+        (resource.data.senderId == request.auth.uid ||
+         resource.data.receiverId == request.auth.uid);
+      allow delete: if false;
+    }
+
+    // ============================================================
+    // USERS / PROFILES
+    // Read: any authenticated user (needed for contact lists)
+    // Write: only the user themselves can modify their profile
+    // Public visitors: NO access to student profiles
+    // Community member profiles: PUBLIC READ allowed
+    // ============================================================
+    match /users/{userId} {
+      allow read: if request.auth != null ||
+        (resource.data.role == 'member' || resource.data.role == 'chairman');
+      allow create: if request.auth != null && request.auth.uid == userId;
+      allow update: if request.auth != null && request.auth.uid == userId;
+      allow delete: if false;
+    }
+
+    // ============================================================
+    // ORGANIZATIONS (Community orgs & school-type distinction)
+    // Public read (for org names in library, community profiles)
+    // Write: authenticated users only
+    // ============================================================
+    match /organizations/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // ============================================================
+    // SCHOOLS - Public read (for school names in library)
+    // Write: authenticated users only
+    // ============================================================
+    match /schools/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // ============================================================
+    // CLASSES & CLASS MEMBERS - Auth required
+    // ============================================================
+    match /classes/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    match /classMembers/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // ============================================================
+    // ACCESS CODES (Schools) - Auth required
+    // ============================================================
+    match /accessCodes/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // ============================================================
+    // COMMUNITY INVITE CODES - Auth required
+    // Read: any auth (members need to validate codes)
+    // Write: authenticated users (chairman creates codes)
+    // ============================================================
+    match /communityInviteCodes/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // ============================================================
+    // ENROLLMENTS - Auth required
+    // ============================================================
+    match /enrollments/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // ============================================================
+    // SIGHTINGS - Auth required
+    // ============================================================
+    match /sightings/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // ============================================================
+    // NOTIFICATIONS - Auth required
+    // ============================================================
+    match /notifications/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // ============================================================
+    // LIBRARY (Public articles) - Public read, auth write
+    // ============================================================
+    match /library/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // ============================================================
+    // SPECIES DATA (Encyclopedia) - Public read, auth write
+    // ============================================================
+    match /species_data/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // ============================================================
+    // RESOURCES (Digital Bookshelf) - Public read, auth write
+    // ============================================================
+    match /resources/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}
