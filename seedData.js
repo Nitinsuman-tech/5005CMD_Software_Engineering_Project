@@ -1,11 +1,11 @@
-import { db } from "./firebase";
+import { db } from "./src/utils/firebase";
 import {
   collection,
   getDocs,
   addDoc,
   serverTimestamp,
 } from "firebase/firestore";
-import { SPECIES_DATA, BOOKSHELF_RESOURCES } from "./data/speciesData";
+import { SPECIES_DATA, BOOKSHELF_RESOURCES } from "./src/data/speciesData";
 
 const seedSpecies = [
   {

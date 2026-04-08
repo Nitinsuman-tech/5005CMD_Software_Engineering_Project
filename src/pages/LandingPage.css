@@ -1,0 +1,660 @@
+/* ═══════════════════════════════════════════════════════
+   KOMODO HUB — Master Landing Page
+   Conservation & Forest theme, clean professionalism
+   ═══════════════════════════════════════════════════════ */
+
+.landing-page {
+  min-height: 100vh;
+  background: var(--color-surface);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--color-text-primary);
+  scroll-behavior: smooth;
+}
+
+/* ── NAVIGATION ── */
+.landing-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border);
+  z-index: 1000;
+}
+
+.landing-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.landing-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.landing-nav-logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-forest-700), var(--color-forest-300));
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.landing-nav-wordmark {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-forest-900);
+  letter-spacing: -0.3px;
+}
+
+.landing-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.landing-nav-link {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--transition-fast);
+}
+
+.landing-nav-link:hover {
+  color: var(--color-forest-700);
+}
+
+.landing-nav-cta {
+  padding: 10px 24px;
+  background: var(--color-forest-700);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.landing-nav-cta:hover {
+  background: var(--color-forest-500);
+  box-shadow: 0 4px 14px rgba(46, 125, 50, 0.25);
+}
+
+.landing-nav-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--color-forest-900);
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+}
+
+/* ── Mobile Nav Overlay ── */
+.landing-nav-mobile {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  padding: 16px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 999;
+}
+
+.landing-nav-mobile-link {
+  display: block;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--transition-fast);
+}
+
+.landing-nav-mobile-link:hover {
+  background: var(--color-forest-50);
+  color: var(--color-forest-700);
+}
+
+.landing-nav-mobile-cta {
+  margin-top: 8px;
+  padding: 12px;
+  background: var(--color-forest-700);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* ── HERO ── */
+.landing-hero {
+  padding: 160px 24px 120px;
+  background: linear-gradient(170deg, var(--color-forest-50) 0%, var(--color-background) 50%, var(--color-forest-100) 100%);
+  text-align: center;
+  scroll-margin-top: 80px;
+}
+
+.landing-hero-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.landing-hero-headline {
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--color-forest-900);
+  line-height: 1.15;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+
+.landing-hero-subtext {
+  font-size: 18px;
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+  margin-bottom: 40px;
+  max-width: 580px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.landing-hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.landing-hero-cta-primary {
+  padding: 14px 36px;
+  background: var(--color-forest-700);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.landing-hero-cta-primary:hover {
+  background: var(--color-forest-500);
+  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.3);
+}
+
+.landing-hero-cta-secondary {
+  padding: 14px 36px;
+  background: transparent;
+  color: var(--color-forest-700);
+  border: 2px solid var(--color-forest-700);
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.landing-hero-cta-secondary:hover {
+  background: var(--color-forest-700);
+  color: #fff;
+}
+
+/* ── FEATURES (Walled Garden) ── */
+.landing-features {
+  padding: 100px 24px;
+  background: var(--color-surface);
+  scroll-margin-top: 80px;
+}
+
+.landing-features-inner {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.landing-features-header {
+  text-align: center;
+  margin-bottom: 72px;
+}
+
+.landing-features-header h2 {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.landing-features-header p {
+  font-size: 18px;
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.landing-feature-row {
+  display: grid;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 64px;
+}
+
+.landing-feature-row:last-child {
+  margin-bottom: 0;
+}
+
+.landing-feature-row-left {
+  grid-template-columns: 5fr 7fr;
+}
+
+.landing-feature-row-right {
+  grid-template-columns: 7fr 5fr;
+}
+
+.landing-feature-icon-col {
+  display: flex;
+  justify-content: center;
+}
+
+.landing-feature-icon {
+  width: 88px;
+  height: 88px;
+  border-radius: var(--radius-lg);
+  background: var(--color-forest-100);
+  display: grid;
+  place-items: center;
+  font-size: 38px;
+  flex-shrink: 0;
+}
+
+.landing-feature-text-col h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 12px;
+}
+
+.landing-feature-text-col p {
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+/* ── SPECIES PREVIEW GRID ── */
+.landing-species {
+  padding: 100px 24px;
+  background: var(--color-background);
+  scroll-margin-top: 80px;
+}
+
+.landing-species-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.landing-species-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.landing-species-header h2 {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.landing-species-header p {
+  font-size: 18px;
+  color: var(--color-text-secondary);
+}
+
+.landing-species-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 48px;
+}
+
+.landing-species-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  transition: box-shadow var(--transition-normal), transform var(--transition-normal);
+}
+
+.landing-species-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.landing-species-card-emoji {
+  text-align: center;
+  font-size: 40px;
+  padding: 20px 0 12px;
+  background: linear-gradient(135deg, var(--color-forest-100), #c8e6c9);
+}
+
+.landing-species-card-body {
+  padding: 16px;
+}
+
+.landing-species-card-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0 0 2px 0;
+}
+
+.landing-species-card-sci {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin: 0 0 10px 0;
+}
+
+.landing-species-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.landing-iucn-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.landing-species-card-pop {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.landing-species-cta-wrap {
+  text-align: center;
+}
+
+.landing-species-cta {
+  padding: 14px 36px;
+  background: transparent;
+  color: var(--color-forest-700);
+  border: 2px solid var(--color-forest-700);
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.landing-species-cta:hover {
+  background: var(--color-forest-700);
+  color: #fff;
+}
+
+/* ── FUNDRAISER (Dark Theme) ── */
+.landing-fundraiser {
+  padding: 100px 24px;
+  background: var(--color-forest-900);
+  color: #fff;
+  scroll-margin-top: 80px;
+}
+
+.landing-fundraiser-inner {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.landing-fundraiser-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.landing-fundraiser-header h2 {
+  font-size: 36px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.landing-fundraiser-header p {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.landing-impact-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 56px;
+}
+
+.landing-impact-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 32px 24px;
+  text-align: center;
+  transition: background var(--transition-normal);
+}
+
+.landing-impact-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.landing-impact-icon {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+
+.landing-impact-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.landing-impact-card p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+}
+
+.landing-fundraiser-widget {
+  max-width: 672px;
+  margin: 0 auto;
+}
+
+/* ── FOOTER ── */
+.landing-footer {
+  padding: 48px 24px 32px;
+  background: #152a20;
+  text-align: center;
+}
+
+.landing-footer-inner {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.landing-footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.landing-footer-link {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--transition-fast);
+}
+
+.landing-footer-link:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.landing-footer-copy {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 13px;
+  margin: 0 0 6px 0;
+}
+
+.landing-footer-attr {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 12px;
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  .landing-species-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  /* Nav */
+  .landing-nav-links {
+    display: none;
+  }
+  .landing-nav-cta {
+    display: none;
+  }
+  .landing-nav-hamburger {
+    display: block;
+  }
+
+  /* Hero */
+  .landing-hero {
+    padding: 120px 20px 80px;
+  }
+  .landing-hero-headline {
+    font-size: 32px;
+  }
+  .landing-hero-subtext {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+  .landing-hero-actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .landing-hero-cta-primary,
+  .landing-hero-cta-secondary {
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+  }
+
+  /* Features */
+  .landing-features {
+    padding: 72px 20px;
+  }
+  .landing-features-header {
+    margin-bottom: 48px;
+  }
+  .landing-features-header h2 {
+    font-size: 28px;
+  }
+  .landing-features-header p {
+    font-size: 16px;
+  }
+  .landing-feature-row-left,
+  .landing-feature-row-right {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .landing-feature-row {
+    margin-bottom: 48px;
+  }
+  .landing-feature-icon-col {
+    order: -1;
+  }
+  .landing-feature-text-col h3 {
+    font-size: 20px;
+    text-align: center;
+  }
+  .landing-feature-text-col p {
+    text-align: center;
+  }
+
+  /* Species */
+  .landing-species {
+    padding: 72px 20px;
+  }
+  .landing-species-header h2 {
+    font-size: 28px;
+  }
+  .landing-species-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Fundraiser */
+  .landing-fundraiser {
+    padding: 72px 20px;
+  }
+  .landing-fundraiser-header h2 {
+    font-size: 28px;
+  }
+  .landing-impact-cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
