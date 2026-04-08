@@ -1,0 +1,272 @@
+.student-dashboard {
+  padding: 28px;
+}
+
+.student-welcome h2 {
+  color: #1b4332;
+  margin-bottom: 4px;
+}
+
+.student-date {
+  color: #4f6f52;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.student-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.student-stat-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border-left: 4px solid #2E7D32;
+  text-align: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.student-stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.student-stat-card .stat-icon {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.student-stat-card .stat-number {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2E7D32;
+  margin-bottom: 4px;
+}
+
+.student-stat-card .stat-label {
+  color: #555;
+  font-size: 13px;
+}
+
+.student-section {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  margin-bottom: 22px;
+}
+
+.student-section h3 {
+  color: #1b4332;
+  margin: 0 0 16px 0;
+  font-size: 18px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-header h3 {
+  margin-bottom: 0;
+}
+
+.section-action-btn {
+  background: #2E7D32;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.section-action-btn:hover {
+  background: #256628;
+}
+
+.loading-text {
+  color: #888;
+  font-size: 14px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 30px 0;
+  color: #666;
+}
+
+.empty-state p {
+  margin-bottom: 14px;
+  font-size: 15px;
+}
+
+.empty-state-btn {
+  background: #2E7D32;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.empty-state-btn:hover {
+  background: #256628;
+}
+
+.program-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.program-card {
+  border: 1px solid #e0e8e0;
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.program-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.program-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #2E7D32, #66BB6A);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.program-card-header h4 {
+  margin: 0;
+  color: #1b4332;
+  font-size: 15px;
+}
+
+.program-status {
+  font-size: 12px;
+  color: #2E7D32;
+  background: #e8f5e9;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.progress-bar-container {
+  margin-bottom: 12px;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: #e8f5e9;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2E7D32, #66BB6A);
+  border-radius: 4px;
+  transition: width 0.3s;
+}
+
+.progress-text {
+  font-size: 12px;
+  color: #666;
+}
+
+.program-view-btn {
+  width: 100%;
+  padding: 8px;
+  background: transparent;
+  color: #2E7D32;
+  border: 1px solid #2E7D32;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.program-view-btn:hover {
+  background: #e8f5e9;
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #2E7D32;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.activity-content p {
+  margin: 0;
+  color: #333;
+  font-size: 14px;
+}
+
+.activity-time {
+  font-size: 12px;
+  color: #999;
+}
+
+.quick-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.quick-action-btn {
+  flex: 1;
+  padding: 14px;
+  background: #f4f8f4;
+  border: 1px solid #d7e3d9;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1b4332;
+  cursor: pointer;
+}
+
+.quick-action-btn:hover {
+  background: #e8f5e9;
+  border-color: #2E7D32;
+}
