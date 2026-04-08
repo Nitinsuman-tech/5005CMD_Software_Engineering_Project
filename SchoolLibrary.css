@@ -1,0 +1,509 @@
+.school-library-page {
+  padding: 28px;
+}
+
+.school-library-header {
+  margin-bottom: 20px;
+}
+
+.school-library-header h3 {
+  color: #1b4332;
+  margin: 0 0 6px 0;
+  font-size: 22px;
+}
+
+.school-library-desc {
+  color: #666;
+  font-size: 14px;
+  margin: 0;
+}
+
+.school-library-filters {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.sl-filter-btn {
+  padding: 7px 16px;
+  border: 1px solid #d7e3d9;
+  border-radius: 20px;
+  background: #fff;
+  color: #555;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sl-filter-btn:hover {
+  background: #f4f8f4;
+}
+
+.sl-filter-active {
+  background: #2E7D32;
+  color: #fff;
+  border-color: #2E7D32;
+}
+
+.sl-loading {
+  color: #888;
+  font-size: 14px;
+}
+
+.school-library-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 16px;
+}
+
+.sl-list-panel {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.sl-list-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  font-weight: 700;
+  color: #1b4332;
+  font-size: 14px;
+}
+
+.sl-list-scroll {
+  max-height: 65vh;
+  overflow-y: auto;
+}
+
+.sl-list-item {
+  width: 100%;
+  text-align: left;
+  padding: 14px 16px;
+  border: none;
+  border-bottom: 1px solid #f2f2f2;
+  background: #fff;
+  cursor: pointer;
+}
+
+.sl-list-item:hover {
+  background: #f8faf8;
+}
+
+.sl-list-item-active {
+  background: #e8f5e9;
+}
+
+.sl-list-item-title {
+  font-weight: 600;
+  color: #1b4332;
+  font-size: 14px;
+}
+
+.sl-list-item-meta {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.sl-list-type {
+  font-size: 11px;
+  background: #e8f5e9;
+  color: #2E7D32;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.sl-list-author {
+  font-size: 12px;
+  color: #888;
+}
+
+.sl-no-items {
+  padding: 20px;
+  text-align: center;
+  color: #999;
+}
+
+.sl-reader-panel {
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+  min-height: 300px;
+}
+
+.sl-reader-panel h2 {
+  margin-top: 0;
+  color: #1b4332;
+  font-size: 20px;
+}
+
+.sl-reader-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.sl-reader-type {
+  background: #e8f5e9;
+  color: #2E7D32;
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.sl-reader-author {
+  font-size: 13px;
+  color: #888;
+}
+
+.sl-reader-date {
+  font-size: 13px;
+  color: #888;
+}
+
+.sl-reader-photo {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid #e0e8e0;
+  margin-bottom: 16px;
+}
+
+.sl-reader-body {
+  white-space: pre-wrap;
+  line-height: 1.7;
+  color: #333;
+  font-size: 15px;
+}
+
+.sl-empty-reader {
+  color: #888;
+  text-align: center;
+  padding-top: 60px;
+  font-size: 15px;
+}
+
+.sl-back-btn {
+  padding: 8px 16px;
+  background: #f4f8f4;
+  color: #1b4332;
+  border: 1px solid #d7e3d9;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sl-back-btn:hover {
+  background: #e8f5e9;
+}
+
+.public-privacy-notice {
+  background: #fff3e0;
+  color: #e65100;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  border: 1px solid #ffcc80;
+}
+
+.sl-list-status {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.sl-list-status.pending {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.sl-list-status.reviewed {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.sl-list-status.approved {
+  background: #e8f5e9;
+  color: #2E7D32;
+}
+
+.sl-reader-status {
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.sl-reader-status.pending {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.sl-reader-status.reviewed {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.sl-teacher-review-note {
+  background: #f4f8f4;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #333;
+  margin-top: 16px;
+  border-left: 3px solid #2E7D32;
+}
+
+.sl-review-section {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e8e0;
+}
+
+.sl-review-section h4 {
+  color: #1b4332;
+  margin: 0 0 10px 0;
+}
+
+.sl-review-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #d7e3d9;
+  border-radius: 8px;
+  font-size: 14px;
+  min-height: 80px;
+  resize: vertical;
+  font-family: inherit;
+  outline: none;
+  margin-bottom: 10px;
+}
+
+.sl-review-submit-btn {
+  padding: 10px 20px;
+  background: #2E7D32;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.sl-review-submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Review stats bar */
+.review-stats-bar {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 10px 16px;
+  background: #f8faf8;
+  border-radius: 10px;
+  border: 1px solid #e0e8e0;
+}
+
+.review-stat {
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+}
+
+.review-stat-pending {
+  color: #e65100;
+}
+
+.review-stat-done {
+  color: #2E7D32;
+}
+
+/* Filter divider */
+.filter-divider {
+  color: #ccc;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+}
+
+/* List item author */
+.sl-list-item-author {
+  font-size: 11px;
+  color: #999;
+  margin-top: 4px;
+}
+
+.sl-feedback-count {
+  font-size: 11px;
+  color: #1565c0;
+  background: #e3f2fd;
+  padding: 2px 6px;
+  border-radius: 8px;
+  margin-top: 4px;
+  display: inline-block;
+}
+
+/* Feedback section in reader */
+.sl-feedback-section {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e8e0;
+}
+
+.sl-feedback-title {
+  color: #1b4332;
+  font-size: 15px;
+  margin: 0 0 12px 0;
+}
+
+.sl-feedback-thread {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.sl-feedback-entry {
+  background: #fafcfa;
+  border-radius: 8px;
+  padding: 10px 14px;
+  border: 1px solid #e8ece8;
+  border-left: 3px solid #d7e3d9;
+}
+
+.sl-feedback-mine {
+  border-left-color: #2E7D32;
+  background: #f4f8f4;
+}
+
+.sl-feedback-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.sl-feedback-author {
+  font-size: 12px;
+  font-weight: 700;
+  color: #2E7D32;
+}
+
+.sl-feedback-time {
+  font-size: 11px;
+  color: #999;
+}
+
+.sl-feedback-text {
+  font-size: 13px;
+  color: #333;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.sl-no-feedback {
+  font-size: 13px;
+  color: #999;
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+/* Feedback form */
+.sl-feedback-form {
+  margin-top: 12px;
+}
+
+.sl-feedback-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid #d7e3d9;
+  border-radius: 8px;
+  font-size: 14px;
+  min-height: 80px;
+  resize: vertical;
+  font-family: inherit;
+  outline: none;
+  margin-bottom: 10px;
+}
+
+.sl-feedback-textarea:focus {
+  border-color: #2E7D32;
+}
+
+.sl-feedback-submit-btn {
+  padding: 10px 20px;
+  background: #2E7D32;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.sl-feedback-submit-btn:hover {
+  background: #256628;
+}
+
+.sl-feedback-submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Publish to Public Library ── */
+.sl-publish-section {
+  margin-top: 16px;
+  margin-bottom: 12px;
+}
+
+.sl-publish-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #1565c0, #1e88e5);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(21, 101, 192, 0.25);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.sl-publish-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(21, 101, 192, 0.35);
+}
+
+.sl-publish-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.sl-published-badge {
+  padding: 10px 16px;
+  background: #e8f5e9;
+  color: #2E7D32;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid #c8e6c9;
+}
