@@ -1,0 +1,365 @@
+.sighting-page {
+  padding: 28px;
+}
+
+.sighting-form-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  margin-bottom: 22px;
+}
+
+.sighting-form-card h3 {
+  color: #1b4332;
+  margin: 0 0 6px 0;
+  font-size: 20px;
+}
+
+.sighting-form-note {
+  color: #888;
+  font-size: 13px;
+  margin: 0 0 18px 0;
+}
+
+.sighting-message {
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.sighting-message-success {
+  background: #e8f5e9;
+  border: 1px solid #7bc47f;
+  color: #1b4332;
+}
+
+.sighting-message-error {
+  background: #fff1f1;
+  border: 1px solid #d98383;
+  color: #c62828;
+}
+
+.sighting-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1b4332;
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px 12px;
+  border: 1px solid #d7e3d9;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  background: #fff;
+  color: #111;
+}
+
+.form-group textarea {
+  padding: 10px 12px;
+  border: 1px solid #d7e3d9;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  min-height: 100px;
+  resize: vertical;
+  font-family: inherit;
+  background: #fff;
+  color: #111;
+}
+
+.form-group.full-width {
+  margin-bottom: 16px;
+}
+
+.file-input {
+  padding: 8px;
+  border: 1px dashed #d7e3d9;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.file-name {
+  font-size: 13px;
+  color: #2E7D32;
+  margin-top: 4px;
+}
+
+.sighting-submit-btn {
+  padding: 12px 28px;
+  background: #2E7D32;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.sighting-submit-btn:hover {
+  background: #256628;
+}
+
+.sighting-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.sighting-history-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.sighting-history-card h3 {
+  color: #1b4332;
+  margin: 0 0 16px 0;
+  font-size: 18px;
+}
+
+.loading-text {
+  color: #888;
+  font-size: 14px;
+}
+
+.empty-text {
+  color: #999;
+  font-size: 14px;
+}
+
+.reports-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.report-item {
+  border: 1px solid #e0e8e0;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.report-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.report-species {
+  font-weight: 700;
+  color: #1b4332;
+  font-size: 16px;
+}
+
+.report-status {
+  padding: 3px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-pending {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.status-approved {
+  background: #e8f5e9;
+  color: #2E7D32;
+}
+
+.status-reviewed {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.report-item-details {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.report-item-desc {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+  margin: 0 0 8px 0;
+}
+
+.report-thumbnail {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e0e8e0;
+}
+
+.teacher-note-display {
+  background: #f4f8f4;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #333;
+  margin-top: 8px;
+  border-left: 3px solid #2E7D32;
+}
+
+.sighting-back-btn {
+  padding: 8px 16px;
+  background: #f4f8f4;
+  color: #1b4332;
+  border: 1px solid #d7e3d9;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sighting-back-btn:hover {
+  background: #e8f5e9;
+}
+
+.field-hint {
+  font-size: 11px;
+  color: #e65100;
+  margin-top: 2px;
+}
+
+/* Contribution type selector */
+.contribution-type-selector {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+
+.contribution-type-btn {
+  padding: 8px 16px;
+  border: 1px solid #d7e3d9;
+  border-radius: 20px;
+  background: #fff;
+  color: #555;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.contribution-type-btn:hover {
+  border-color: #2E7D32;
+  color: #2E7D32;
+}
+
+.contribution-type-active {
+  background: #2E7D32 !important;
+  color: #fff !important;
+  border-color: #2E7D32 !important;
+}
+
+/* Report type badge */
+.report-type-badge {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: #e3f2fd;
+  color: #1565c0;
+  font-weight: 600;
+  margin-top: 4px;
+  display: inline-block;
+}
+
+/* Feedback section */
+.feedback-section {
+  margin-top: 10px;
+  border-top: 1px solid #e8ece8;
+  padding-top: 8px;
+}
+
+.feedback-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  background: #f4f8f4;
+  border: 1px solid #d7e3d9;
+  border-radius: 8px;
+  color: #1b4332;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.feedback-toggle-btn:hover {
+  background: #e8f5e9;
+}
+
+.feedback-chevron {
+  margin-left: auto;
+  font-size: 10px;
+  color: #888;
+}
+
+.feedback-thread {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  padding-left: 12px;
+  border-left: 2px solid #d7e3d9;
+}
+
+.feedback-entry {
+  background: #fafcfa;
+  border-radius: 8px;
+  padding: 10px 12px;
+  border: 1px solid #e8ece8;
+}
+
+.feedback-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.feedback-author {
+  font-size: 12px;
+  font-weight: 600;
+  color: #2E7D32;
+}
+
+.feedback-time {
+  font-size: 11px;
+  color: #999;
+}
+
+.feedback-text {
+  font-size: 13px;
+  color: #333;
+  line-height: 1.4;
+  margin: 0;
+}
